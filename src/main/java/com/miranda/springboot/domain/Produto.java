@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Produto implements Serializable {
 
@@ -23,14 +25,15 @@ public class Produto implements Serializable {
 	private String nome;
 	private double preco;
 
-	// Mapeamento muitos pra muitos, criando uma nova tabela nome(PRODUTO_CATEGORIA).
+	// Mapeamento muitos pra muitos, criando uma nova tabela
+	// nome(PRODUTO_CATEGORIA).
 	// Este atributo apresetanta um relacionamento com produtos na classe Categoia.
 	// Ver classe Categoria.
+
+	@JsonBackReference // Do outro lado da associação já foram buscados os objetos. com isso é omitido a
+						// lista abaixo para cada produto
 	@ManyToMany
-	@JoinTable(name = "PRODUTO_CATEGORIA", 
-				joinColumns = @JoinColumn(name = "produto_id"), 
-					inverseJoinColumns = @JoinColumn(name = "categoria_id")
-			)
+	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
 
 	public Produto() {

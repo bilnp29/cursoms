@@ -13,9 +13,10 @@ import com.miranda.springboot.services.CategoriaService;
 /**
  * @author Bruno
  * 
- * Classe destinada a comunuca-se com as camadas de aplicação e servico da classe repositorio. 
+ *         Classe destinada a comunuca-se com as camadas de aplicação e servico
+ *         da classe repositorio.
  * 
- * Controller
+ *         Controller
  *
  */
 @RestController
@@ -24,13 +25,13 @@ public class CategoriaResources {
 
 	@Autowired
 	private CategoriaService service;
-	
+
 	/**
-	 * Método recebe uma requisição da aplicação onde esta irá repassa a informação para a camanda de servico que irá realizar a
-	 * busca pelo id.
+	 * Método recebe uma requisição da aplicação onde esta irá repassa a informação
+	 * para a camanda de servico que irá realizar a busca pelo id.
 	 */
-	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Categoria obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
 	}
