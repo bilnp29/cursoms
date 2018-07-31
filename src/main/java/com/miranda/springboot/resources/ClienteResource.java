@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.miranda.springboot.domain.Categoria;
-import com.miranda.springboot.services.CategoriaService;
+import com.miranda.springboot.domain.Cliente;
+import com.miranda.springboot.services.ClienteService;
 
 /**
  * @author Bruno
@@ -20,11 +20,11 @@ import com.miranda.springboot.services.CategoriaService;
  *
  */
 @RestController
-@RequestMapping(value = "/categorias")
-public class CategoriaResources {
+@RequestMapping(value = "/clientes")
+public class ClienteResource {
 
 	@Autowired
-	private CategoriaService service;
+	private ClienteService service;
 
 	/**
 	 * Método recebe uma requisição da aplicação onde esta irá repassa a informação
@@ -32,7 +32,7 @@ public class CategoriaResources {
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Categoria obj = service.buscar(id);
+		Cliente obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
 	}
 }

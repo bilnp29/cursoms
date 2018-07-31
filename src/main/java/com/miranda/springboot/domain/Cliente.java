@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.miranda.springboot.domain.enums.TipoCliente;
 
 @Entity
@@ -32,6 +33,7 @@ public class Cliente implements Serializable {
 	// Associações. 1 cliente tem carios endereços. Já mapeado na classe endereço.
 	// Ne temos um atributo do tipo cliente.
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 
