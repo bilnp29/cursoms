@@ -44,6 +44,10 @@ public class Cliente implements Serializable {
 	@ElementCollection // Criando uma entidade fraca.
 	@CollectionTable(name = "TELEFONE") // Nome da tabela no banco
 	private Set<String> telefones = new HashSet<>();
+	
+	// Associações: Um Cliente tem muitos pedidos.
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Cliente() {
 
@@ -112,6 +116,14 @@ public class Cliente implements Serializable {
 
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	@Override
