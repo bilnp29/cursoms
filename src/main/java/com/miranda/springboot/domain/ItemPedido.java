@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * O identificador da classe será feita com base em uma classe auxiliar
  * (ItemPedidoPK.). Como esta classe é uma classe de associação, quem identifica
@@ -20,6 +22,7 @@ public class ItemPedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	// Chave primaria embutida. Composta pelos objetos Pedido e Produto
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
@@ -40,7 +43,7 @@ public class ItemPedido implements Serializable {
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
-
+	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
