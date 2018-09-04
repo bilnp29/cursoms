@@ -19,7 +19,8 @@ public class Categoria implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	@ManyToMany(mappedBy = "categorias") // Mapeamento muitos p/ muitos utilizando JPA, um produto tem 1...* categorias. 
+	@ManyToMany(mappedBy = "categorias") 
+	// Mapeamento muitos p/ muitos utilizando JPA, um produto tem 1...* categorias. 
 	//Ver classe Produto atributo categorias(coleção)
 	private List<Produto> produtos = new ArrayList<>();
 	
