@@ -27,7 +27,7 @@ public class PedidoService {
 	/**
 	 * Realizar busca pela categoria de acordo com o id.
 	 */
-	public Pedido buscar(Integer id) {
+	public Pedido find(Integer id) {
 		Optional<Pedido> obj = repositorio.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id " + id + ", tipo: " + Pedido.class.getName()));
