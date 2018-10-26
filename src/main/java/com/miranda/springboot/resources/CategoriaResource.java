@@ -33,6 +33,8 @@ public class CategoriaResource {
 	/**
 	 * Método recebe uma requisição da aplicação, onde esta irá repassa a informação
 	 * para a camanda de servico que irá realizar a busca pelo id.
+	 * 
+	 * Método de busca pelo id
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
@@ -44,6 +46,8 @@ public class CategoriaResource {
 	/**
 	 * Método recebe um objeto do tipo categoria, chama a função insert, onde esta irá salva 
 	 * as informações no banco de dados.
+	 * 
+	 * Método para inserir
 	 * @param obj
 	 * @return
 	 */
@@ -55,10 +59,28 @@ public class CategoriaResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	/**
+	 * Método modifica e atualizar dados da categoria.
+	 * @param obj
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> upDate(@RequestBody Categoria obj,@PathVariable Integer id){
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
+	}
+	
+	/**
+	 * Método responsavel para deletar uma categoria a parti do id.
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+		
 	}
 }

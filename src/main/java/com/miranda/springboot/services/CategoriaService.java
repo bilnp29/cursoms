@@ -3,10 +3,12 @@ package com.miranda.springboot.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.miranda.springboot.domain.Categoria;
 import com.miranda.springboot.repositories.CategoriaRepository;
+import com.miranda.springboot.services.exceptions.DataIntegrityException;
 import com.miranda.springboot.services.exceptions.ObjectNotFoundException;
 
 /**
@@ -32,10 +34,10 @@ public class CategoriaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id " + id + ", tipo: " + Categoria.class.getName()));
 	}
-	
-	
+
 	/**
 	 * Inserindo um objeto categoria
+	 * 
 	 * @param obj
 	 * @return
 	 */
@@ -44,9 +46,27 @@ public class CategoriaService {
 		return repositorio.save(obj);
 	}
 
-
+	/**
+	 * Atualizar ou modifica uma categoria
+	 * @param obj
+	 * @return
+	 */
 	public Categoria update(Categoria obj) {
 		find(obj.getId());
 		return repositorio.save(obj);
+	}
+
+	/**
+	 * Exclui uma categoria pelo id.
+	 * @param id
+	 */
+	public void delete(Integer id) {
+		find(id);
+		try {
+		repositorio.deleteById(id);
+		}catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos");
+		}
+	
 	}
 }
