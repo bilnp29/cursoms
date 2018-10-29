@@ -1,5 +1,6 @@
 package com.miranda.springboot.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +69,14 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos");
 		}
 	
+	}
+
+	/**
+	 * Retorna uma lista de categoria quando soliciato
+	 * @return lista Categorias
+	 */
+	public List<Categoria> findAll() {
+		
+		return repositorio.findAll();
 	}
 }
