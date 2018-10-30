@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.miranda.springboot.domain.Categoria;
+import com.miranda.springboot.dto.CategoriaDTO;
 import com.miranda.springboot.repositories.CategoriaRepository;
 import com.miranda.springboot.services.exceptions.DataIntegrityException;
 import com.miranda.springboot.services.exceptions.ObjectNotFoundException;
@@ -96,5 +97,16 @@ public class CategoriaService {
 		PageRequest pageRequest = PageRequest.of(page, linesParPage, Direction.valueOf(direction), orderBy);
 		return repositorio.findAll(pageRequest);
 			
+	}
+	
+	/**
+	 * Método auxiliar que instancia um Categoria aparti de um objeto DTO
+	 * 
+	 * @param objDto
+	 * @return
+	 */
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		
+		return new Categoria(objDto.getId(),objDto.getNome());
 	}
 }
