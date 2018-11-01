@@ -38,11 +38,12 @@ public class CategoriaResource {
 	private CategoriaService service;
 
 	/**
+	 *	 Método de busca pelo id
+	 * 
 	 * Método recebe uma requisição da aplicação, onde esta irá repassa a informação
 	 * para a camanda de servico que irá realizar a busca pelo id.
 	 * 
-	 * Método de busca pelo id
-	 */
+	 **/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 		Categoria obj = service.find(id);
@@ -50,10 +51,10 @@ public class CategoriaResource {
 	}
 
 	/**
+	 * 
+	 * 
 	 * Método recebe um objeto do tipo categoria, chama a função insert, onde esta
 	 * irá salva as informações no banco de dados.
-	 * 
-	 * Método para inserir
 	 * 
 	 * @param obj
 	 * @return
