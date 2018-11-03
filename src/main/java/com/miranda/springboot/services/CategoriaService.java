@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.miranda.springboot.domain.Categoria;
+import com.miranda.springboot.domain.Cliente;
 import com.miranda.springboot.dto.CategoriaDTO;
 import com.miranda.springboot.repositories.CategoriaRepository;
 import com.miranda.springboot.services.exceptions.DataIntegrityException;
@@ -52,13 +53,28 @@ public class CategoriaService {
 	}
 
 	/**
-	 * Atualizar ou modifica uma categoria
-	 * @param obj
-	 * @return
+	 * Atualizar ou modifica uma Categoria
+	 * 
+	 * Captura uma categoria aparti do método find repassa os dados para um novo objeto do tipo caegoria.
+	 * A atualização só será feita em alguns atributos do cliente.
+	 * 
+	 * @param obj objeto de uma categoria
+	 * @return retorna objeto da categoria atualizado
 	 */
 	public Categoria update(Categoria obj) {
-		find(obj.getId());
-		return repositorio.save(obj);
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repositorio.save(newObj);
+	}
+	
+	/**
+	 * Método auxiliar para atualização do cliente
+	 * 
+	 * @param newObj Novo objeto cliente, os dados serão atualizados no método.
+	 * @param obj Objeto antigo
+	 */
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());	
 	}
 
 	/**
