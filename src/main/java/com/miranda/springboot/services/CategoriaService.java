@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.miranda.springboot.domain.Categoria;
-import com.miranda.springboot.domain.Cliente;
 import com.miranda.springboot.dto.CategoriaDTO;
 import com.miranda.springboot.repositories.CategoriaRepository;
 import com.miranda.springboot.services.exceptions.DataIntegrityException;

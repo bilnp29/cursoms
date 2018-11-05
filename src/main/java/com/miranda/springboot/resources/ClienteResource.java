@@ -1,5 +1,6 @@
 package com.miranda.springboot.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.miranda.springboot.domain.Cliente;
 import com.miranda.springboot.dto.ClienteDTO;
+import com.miranda.springboot.dto.ClienteNewDTO;
 import com.miranda.springboot.services.ClienteService;
 
 /**
@@ -46,6 +49,24 @@ public class ClienteResource {
 		Cliente obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	/**
+	 * 
+	 * 
+	 * Método recebe um objeto do tipo categoria, chama a função insert, onde esta
+	 * irá salva as informações no banco de dados.
+	 * 
+	 * @param obj
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
+		Cliente obj = service.fromDTO(objDto); // Convertendo para um objeto ResponseEntity
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}
+
 	
 	/**
 	 * Método modifica e atualizar dados de um Cliente.
