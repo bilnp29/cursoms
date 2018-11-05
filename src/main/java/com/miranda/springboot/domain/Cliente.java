@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -31,7 +32,9 @@ public class Cliente implements Serializable {
 	private Integer tipo;
 
 	// Associações. 1 cliente tem varios endereços.
-	@OneToMany(mappedBy = "cliente")
+	// cascade --> Propriedade do JPA que permiti: Quando a uma mundaça no cliente
+	// será refletido em cascata para o endereço. Ex: Deletar um cliente o endereço será deletado.
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	// Os telefones serão representados por um conjunto de String, neste caso um
