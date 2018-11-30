@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.miranda.springboot.domain.Cliente;
+import com.miranda.springboot.services.validation.ClienteUpdate;
 
 /**
  * Classe auxiliar da classe cliente
@@ -15,6 +16,7 @@ import com.miranda.springboot.domain.Cliente;
  * @author Bruno
  *
  */
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
