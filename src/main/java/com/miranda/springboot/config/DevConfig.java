@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.miranda.springboot.services.DBService;
+import com.miranda.springboot.services.EmailService;
+import com.miranda.springboot.services.SmtpEmailService;
 
 @Configuration
 @Profile("dev")
@@ -29,4 +31,10 @@ public class DevConfig {
 		}
 		return false;
 	}
+	
+	@Bean
+	public EmailService emailService(){
+		return new SmtpEmailService();
+	}
+	
 }
